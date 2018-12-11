@@ -102,7 +102,6 @@ inline float dtQueryFilter::getCost(const float* pa, const float* pb,
 	
 static const float H_SCALE = 0.999f; // Search heuristic scale.
 
-
 dtNavMeshQuery* dtAllocNavMeshQuery()
 {
 	void* mem = dtAlloc(sizeof(dtNavMeshQuery), DT_ALLOC_PERM);
@@ -988,6 +987,7 @@ dtStatus dtNavMeshQuery::findPath(dtPolyRef startRef, dtPolyRef endRef,
 	if (!m_nav->isValidPolyRef(startRef) || !m_nav->isValidPolyRef(endRef) ||
 		!startPos || !dtVisfinite(startPos) ||
 		!endPos || !dtVisfinite(endPos) ||
+		!pathCount ||
 		!filter || !path || maxPath <= 0)
 	{
 		return DT_FAILURE | DT_INVALID_PARAM;
@@ -999,7 +999,7 @@ dtStatus dtNavMeshQuery::findPath(dtPolyRef startRef, dtPolyRef endRef,
 		*pathCount = 1;
 		return DT_SUCCESS;
 	}
-	
+
 	m_nodePool->clear();
 	m_openList->clear();
 	
@@ -1164,6 +1164,7 @@ dtStatus dtNavMeshQuery::findPath(dtPolyRef startRef, dtPolyRef endRef,
 	return status;
 }
 
+
 dtStatus dtNavMeshQuery::getPathToNode(dtNode* endNode, dtPolyRef* path, int* pathCount, int maxPath) const
 {
 	// Find the length of the entire path.
@@ -1203,7 +1204,6 @@ dtStatus dtNavMeshQuery::getPathToNode(dtNode* endNode, dtPolyRef* path, int* pa
 
 	return DT_SUCCESS;
 }
-
 
 /// @par
 ///

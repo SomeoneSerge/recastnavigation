@@ -556,7 +556,7 @@ private:
 
 	// Gets the path leading to the specified end node.
 	dtStatus getPathToNode(struct dtNode* endNode, dtPolyRef* path, int* pathCount, int maxPath) const;
-	
+
 	const dtNavMesh* m_nav;				///< Pointer to navmesh data.
 
 	struct dtQueryData
